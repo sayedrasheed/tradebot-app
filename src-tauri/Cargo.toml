@@ -1,0 +1,26 @@
+[package]
+name = "tradebot-app"
+version = "1.0.0"
+description = "A Tauri React App for TradeBot"
+authors = ["Sayed Amir"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "1", features = [] }
+
+[dependencies]
+tauri = { version = "1", features = [ "dialog-open", "cli", "shell-open"] }
+tokio = { version = "1.35.1", features = ["full"] }
+snafu = "0.7.0"
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+zenoh-node = { git = "https://github.com/sayedrasheed/zenoh-node-rs.git" }
+tradebot-protos = { git = "https://github.com/sayedrasheed/tradebot-protos-rs.git" }
+async-trait = "0.1.74"
+serde_yaml = { version = "0.9.14" }
+
+[features]
+# This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]
