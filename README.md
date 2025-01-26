@@ -4,7 +4,7 @@ A React-based Tauri application designed to manage TradeBot and monitor its outp
 It utilizes Tauri events to communicate between the frontend and backend. These events are then forwarded to the TradeBot services through the Zenoh protocol. All interactions between the frontend, backend, and TradeBot are transmitted as Protobuf messages.
 
 For chart visualizations, it leverages TradingView's [Lightweight Charts](https://www.tradingview.com/lightweight-charts/) as the primary charting library. Currently, the app uses my custom fork of Lightweight Charts for two reasons:
-1. It uses the unreleased version 5 candidate, which introduces multipane support.
+1. It uses TradingView's unreleased v5 candidate, which introduces multipane support.
 2. It adds custom box-drawing functionality to enable visualization of TradeBot's Rectangle output.
 
 # Installation
