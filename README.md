@@ -11,7 +11,8 @@ For chart visualizations, it leverages TradingView's [Lightweight Charts](https:
 1. Install [Node](https://nodejs.org/download/)
 2. Install [Tauri](https://v1.tauri.app/v1/guides/getting-started/prerequisites/)
 3. Install [Protobuf](https://github.com/protocolbuffers/protobuf/releases/tag/v3.16.0) NOTE: Needs to be version >=3.16.0
-4. Clone repo and run npm install
+4. Clone repo and run git submodule update --init --recursive
+5. Run npm install
 
 # Demo
 
