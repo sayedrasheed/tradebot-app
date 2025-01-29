@@ -124,7 +124,7 @@ async fn main() {
         .await
         .unwrap();
     let strategies_from_dir_req_publisher = service_node
-        .new_publisher(&topics.get("strategies_from_dir_request"))
+        .new_publisher(&topics.get("read_from_dir_request"))
         .await
         .unwrap();
     let strategy_from_log_req_publisher = service_node
