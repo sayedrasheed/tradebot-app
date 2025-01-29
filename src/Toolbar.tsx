@@ -9,7 +9,7 @@ import {
 } from "@tabler/icons-react";
 import { invoke } from "@tauri-apps/api";
 import { SelectedStrategy, Batch } from "./types";
-import { Dispatch, SetStateAction} from "react"
+import { Dispatch, SetStateAction } from "react"
 
 interface ToolbarProps {
     batchesMap: Map<string, Batch>,
@@ -37,7 +37,7 @@ export function Toolbar({
     setRefresh,
     setView,
     setSelectedOverallBatch,
-} : ToolbarProps) {
+}: ToolbarProps) {
     let [symbolList, setSymbolList] = useState<string[]>([]);
     let [periodList, setPeriodList] = useState<number[]>([]);
 
@@ -101,10 +101,10 @@ export function Toolbar({
                 onClick={(e: any) => {
                     setRefresh(true);
                     invoke("chart_request", { batchId: "", strategyId: "", symbol: "", periodS: 0 });
-                    setSelectedStrategy({batchId: "", strategyId: ""});
+                    setSelectedStrategy({ batchId: "", strategyId: "" });
                     setActiveSymbol("");
                     setActivePeriod(0);
-                    invoke("strategies_request");
+                    invoke("app_request");
                     setView("strategy");
                 }}
             >
@@ -117,7 +117,7 @@ export function Toolbar({
                 radius="0"
                 color="#242424"
                 onClick={(e: any) => {
-                    invoke("strategy_from_dir");
+                    invoke("read_from_dir");
                 }}
             >
                 <IconFolderOpen style={{ width: "70%", height: "70%" }} stroke={1.0} />
@@ -129,7 +129,7 @@ export function Toolbar({
                 radius="0"
                 color="#242424"
                 onClick={(e: any) => {
-                    invoke("run_strategy");
+                    invoke("run_yaml");
                 }}
             >
                 <IconRocket style={{ width: "70%", height: "70%" }} stroke={1.0} />

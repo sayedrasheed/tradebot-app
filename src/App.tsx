@@ -35,7 +35,7 @@ function App() {
     const overallStatsEvent = "overall_stats";
 
     useEffect(() => {
-        invoke("strategies_request");
+        invoke("app_request");
 
         handler.open();
         listen<AppResponse>("strategy_list", (event) => {

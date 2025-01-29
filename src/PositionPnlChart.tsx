@@ -15,8 +15,10 @@ interface PositionPnlChartProps {
 export function PositionPnlChart({ selectedStrategy }: PositionPnlChartProps) {
     const chartContainerRef = useRef<HTMLDivElement>(null);
     const chart = useRef<IChartApi>(undefined);
+    const unrealizedCountThreshold = 10;
     let lineSeries = useRef<ISeriesApi<"Baseline", Time>>(undefined);
     let currIdx = 0;
+    let unrealizedCount = useRef<number>(0);
     let positions = useRef(new Set());
     let [pnl, setPnl] = useState<number>(0.0);
 
@@ -25,6 +27,7 @@ export function PositionPnlChart({ selectedStrategy }: PositionPnlChartProps) {
             setPnl(0.0);
             positions.current.add(event.payload.position_id);
             currIdx += 1;
+            unrealizedCount.current = 0;
 
             if (lineSeries.current !== undefined) {
                 lineSeries.current.update({ time: currIdx as UTCTimestamp, value: 0 });
@@ -33,7 +36,8 @@ export function PositionPnlChart({ selectedStrategy }: PositionPnlChartProps) {
 
         const unrealized_unlisten = listen<PositionPnlUnrealized>("pos_pnl_unrealized", (event) => {
             if (lineSeries.current !== undefined) {
-                if (positions.current.has(event.payload.position_id) === false) {
+                unrealizedCount.current += 1;
+                if (positions.current.has(event.payload.position_id) === false && unrealizedCount.current >= unrealizedCountThreshold) {
                     currIdx += 1;
                     lineSeries.current.update({ time: currIdx as UTCTimestamp, value: event.payload.value!.value });
                     setPnl(Number(event.payload.value!.value.toFixed(2)));
@@ -98,6 +102,8 @@ export function PositionPnlChart({ selectedStrategy }: PositionPnlChartProps) {
                     bottomFillColor1: "rgba( 239, 83, 80, 0.05)",
                     bottomFillColor2: "rgba( 239, 83, 80, 0.28)",
                 });
+            } else {
+                lineSeries.current?.setData([]);
             }
         } else {
             if (chart.current !== undefined) {
@@ -109,6 +115,7 @@ export function PositionPnlChart({ selectedStrategy }: PositionPnlChartProps) {
 
         setPnl(0.0);
         currIdx = 0;
+        unrealizedCount.current = 0;
         positions.current = new Set();
     }, [selectedStrategy]);
 
@@ -119,7 +126,7 @@ export function PositionPnlChart({ selectedStrategy }: PositionPnlChartProps) {
                     Current Position Profit & Loss
                 </h3>
                 <div style={{ color: pnl >= 0.0 ? "green" : "red", fontSize: 20, textAlign: "center" }}>
-                    {pnl >= 0.0 ? "+" : "-"}
+                    {pnl >= 0.0 ? "+" : ""}
                     {pnl}
                 </div>
                 <div>
