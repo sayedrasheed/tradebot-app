@@ -7,6 +7,8 @@ For chart visualizations, it leverages TradingView's [Lightweight Charts](https:
 1. It uses TradingView's unreleased v5 candidate, which introduces multipane support.
 2. It adds custom box-drawing functionality to enable visualization of TradeBot's Rectangle output.
 
+TradeBot services repository can be found [here](https://github.com/sayedrasheed/tradebot-rs)
+
 # Installation
 1. Install [Node](https://nodejs.org/download/)
 2. Install [Tauri](https://v1.tauri.app/v1/guides/getting-started/prerequisites/)
@@ -15,5 +17,12 @@ For chart visualizations, it leverages TradingView's [Lightweight Charts](https:
 5. Run npm install
 
 # Demo
+## Run resimulation using historical data
+[YouTube](https://www.youtube.com/shorts/CoOf7fnGejE)
 
+<img src='./videos/resim_demo.gif'>
+
+## Read results from logged data and view Profit & Loss report
+[YouTube](https://www.youtube.com/shorts/FK9qkTfclcQ)
+<img src='./videos/read_from_log_demo.gif'>
 
