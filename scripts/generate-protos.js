@@ -49,6 +49,7 @@ if (protoFiles.length > 0) {
     execSync(
         `protoc \
                 --plugin=protoc-gen-ts="${protocGenTsPath}" \
+                --ts_opt=use_proto_field_name \
                 --ts_out="${outDir}" \
                 -I="${protoAppDir}" \
                 -I="${protoAlgoDir}" \
